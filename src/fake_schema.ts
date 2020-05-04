@@ -99,9 +99,31 @@ export const fakeFieldResolver: GraphQLFieldResolver<unknown, unknown> = async (
     }
 
     if (isListType(type)) {
-      return Array(getListLength(fieldDef))
+      const uniq = (value,index,self) => self.indexOf(value) === index;
+      let listStruct = Array(getListLength(fieldDef));
+      let valuesList = [];
+      return listStruct
         .fill(null)
-        .map(() => fakeValueOfType(type.ofType));
+        .map(() => {
+          let fakeValue;
+          let index = 0;
+  
+          fakeValue = fakeValueOfType(type.ofType)
+          if (valuesList.length === 0) {
+            valuesList.push(fakeValue);
+            return fakeValue;
+          }
+  
+          let currentLength = valuesList.filter(uniq).length;
+          while (valuesList.filter(uniq).length === currentLength) {
+            fakeValue = fakeValueOfType(type.ofType);
+            valuesList.push(fakeValue)
+            index += 1;
+            if (index >= 10) { break }
+          }
+  
+          return fakeValue
+        })
     }
 
     const valueCB = getExampleValueCB(fieldDef) || getFakeValueCB(fieldDef) ||
