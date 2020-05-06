@@ -58,10 +58,7 @@ function runServer(options, userSDL, remoteSDL, customExecuteFn) {
         var fs = require('fs');
         var https_options = {
             key: fs.readFileSync(tlsKeyFile),
-            cert: fs.readFileSync(tlsCert),
-            ca: [
-                fs.readFileSync(String(tlsCaCert)),
-            ]
+            cert: fs.readFileSync(tlsCert)
         };
         protocol = 'https';
     }

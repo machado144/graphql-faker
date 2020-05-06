@@ -38,13 +38,6 @@ function builder(cmd) {
             requiresArg: true,
             default: process.env.GQLF_CERT || "missing",
         },
-        'tlscacert': {
-            alias: 'tca',
-            describe: 'Path to the issuing CA TLS certificate',
-            type: 'string',
-            requiresArg: true,
-            default: process.env.GQLF_CACERT || "missing",
-        },
         'https': {
             alias: 's',
             describe: 'Use TLS encryption. Requires key, cert, and cacert.',
@@ -113,7 +106,6 @@ function parseCLI(commandCB) {
             hostname: argv.hostname,
             tlsKeyFile: argv['tlskeyfile'],
             tlsCert: argv['tlscert'],
-            tlsCaCert: argv['tlscacert'],
             useHttps: argv.https,
             corsOrigin: argv['cors-origin'],
             openEditor: argv.open,

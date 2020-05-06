@@ -52,17 +52,14 @@ cli_1.parseCLI((options) => {
 });
 function runServer(options, userSDL, remoteSDL, customExecuteFn) {
     // Adding CLI params for HTTPS
-    const { useHttps, tlsKeyFile, tlsCert, tlsCaCert } = options;
+    const { useHttps, tlsKeyFile, tlsCert } = options;
     var protocol;
     if (useHttps) {
         var https = require('https');
         var fs = require('fs');
         var https_options = {
             key: fs.readFileSync(tlsKeyFile),
-            cert: fs.readFileSync(tlsCert),
-            ca: [
-                fs.readFileSync(String(tlsCaCert)),
-            ]
+            cert: fs.readFileSync(tlsCert)
         };
         protocol = 'https';
     }

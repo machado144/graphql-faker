@@ -87,7 +87,7 @@ function runServer(
 
 
 	// Adding CLI params for HTTPS
-	const { useHttps, tlsKeyFile, tlsCert, tlsCaCert }  = options;
+	const { useHttps, tlsKeyFile, tlsCert }  = options;
   
   var protocol;
 	if (useHttps) {
@@ -95,11 +95,7 @@ function runServer(
 		var fs = require('fs');
 		var https_options = {
 		  key: fs.readFileSync(tlsKeyFile),
-		  cert: fs.readFileSync(tlsCert),
-		  ca: [ 
-				fs.readFileSync(String(tlsCaCert)),
-				 
-			   ]
+		  cert: fs.readFileSync(tlsCert)
 		};
 		protocol = 'https';
 	} else {

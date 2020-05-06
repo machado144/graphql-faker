@@ -6,7 +6,6 @@ type Options = {
   hostname: string,
   tlsKeyFile: string,
   tlsCert: string,
-  tlsCaCert: string,
   useHttps: boolean,
   corsOrigin: string | true;
   openEditor: boolean;
@@ -51,13 +50,6 @@ function builder(cmd) {
       type: 'string',
       requiresArg: true,
       default: process.env.GQLF_CERT || "missing",
-  },
-'tlscacert': {
-      alias: 'tca',
-      describe: 'Path to the issuing CA TLS certificate',
-      type: 'string',
-      requiresArg: true,
-      default: process.env.GQLF_CACERT || "missing",
   },
 'https': {
 alias: 's',
@@ -131,7 +123,6 @@ export function parseCLI(commandCB: (options: Options) => void) {
 			hostname: argv.hostname,
 			tlsKeyFile: argv['tlskeyfile'],
 			tlsCert: argv['tlscert'],
-			tlsCaCert: argv['tlscacert'],
 			useHttps: argv.https,
       corsOrigin: argv['cors-origin'],
       openEditor: argv.open,
