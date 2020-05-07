@@ -124,6 +124,7 @@ export const fakeFieldResolver: GraphQLFieldResolver<unknown, unknown> = async (
   
           return fakeValue
         })
+        .sort((a,b) => a - b)
     }
 
     const valueCB = getExampleValueCB(fieldDef) || getFakeValueCB(fieldDef) ||

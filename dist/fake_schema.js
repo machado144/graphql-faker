@@ -61,7 +61,8 @@ exports.fakeFieldResolver = async (source, args, context, info) => {
                     }
                 }
                 return fakeValue;
-            });
+            })
+                .sort((a, b) => a - b);
         }
         const valueCB = getExampleValueCB(fieldDef) || getFakeValueCB(fieldDef) ||
             getExampleValueCB(type) || getFakeValueCB(type);
